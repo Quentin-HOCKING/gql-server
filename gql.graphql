@@ -1,0 +1,53 @@
+query getSingleCourse($courseID: Int!) {
+  course(id: $courseID) {
+    title
+    author
+    description
+    topic
+    url
+  }
+}
+
+query getCourseWithFragments($courseID1: Int!, $courseID2: Int!) {
+  course1: course(id: $courseID1) {
+    ...courseFields
+  }
+  course2: course(id: $courseID2) {
+    ...courseFields
+  }
+}
+
+fragment courseFields on Course {
+  title
+  author
+  description
+  topic
+  url
+}
+
+mutation updateCourseTopic($id: Int!, $topic: String!) {
+  updateCourseTopic(id: $id, topic: $topic) {
+    ...courseFields
+  }
+}
+
+query getCoursesTitle($title: String!) {
+  getCoursesTitle(title: $title) {
+    title
+    author
+    description
+    topic
+    url
+  }
+}
+
+mutation addCourse($CourseInput: CourseInput) {
+  addCourse(input: $CourseInput) {
+    id
+    title
+    author
+    description
+    topic
+    url
+  }
+}
